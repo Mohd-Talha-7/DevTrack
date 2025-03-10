@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { List, ListItem, ListItemText, IconButton, Paper, Typography, Divider, Chip, Box, useMediaQuery } from "@mui/material";
 import { Delete, CheckCircle, Undo } from "@mui/icons-material";
 

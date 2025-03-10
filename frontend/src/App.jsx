@@ -17,7 +17,7 @@ export default function App() {
     const [sort, setSort] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:5000/tasks")
+        axios.get(`${import.meta.env.VITE_API_URL}/tasks`)
             .then(res => setTasks(res.data))
             .catch(err => console.error("Error fetching tasks:", err));
     }, []);
@@ -32,7 +32,7 @@ export default function App() {
     };
 
     const addTask = (newTask) => {
-        axios.post("http://localhost:5000/tasks", { ...newTask, completed: false })
+        axios.post(`${import.meta.env.VITE_API_URL}/tasks`, { ...newTask, completed: false })
             .then(res => {
                 setTasks(prevTasks => [...prevTasks, res.data]);
                 logActivity(`Task Added: "${newTask.title}"`);
@@ -41,7 +41,7 @@ export default function App() {
     };
 
     const toggleComplete = (id, completed) => {
-        axios.put(`http://localhost:5000/tasks/${id}`, { completed: !completed })
+        axios.put(`${import.meta.env.VITE_API_URL}/tasks/${id}`, { completed: !completed })
             .then(() => {
                 setTasks(prevTasks => prevTasks.map(task => 
                     task._id === id ? { ...task, completed: !completed } : task
@@ -53,7 +53,7 @@ export default function App() {
 
     const deleteTask = (id) => {
         const deletedTask = tasks.find(task => task._id === id);
-        axios.delete(`http://localhost:5000/tasks/${id}`)
+        axios.delete(`${import.meta.env.VITE_API_URL}/tasks/${id}`)
             .then(() => {
                 setTasks(prevTasks => prevTasks.filter(task => task._id !== id));
                 logActivity(`Task Deleted: "${deletedTask?.title}"`);
